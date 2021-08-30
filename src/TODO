@@ -1,0 +1,84 @@
+#
+# Copyright (C) 2005-2020 Darron Broad
+# All rights reserved.
+#
+# This file is part of Pickle Microchip PIC ICSP.
+#
+# Pickle Microchip PIC ICSP is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published
+# by the Free Software Foundation.
+#
+# Pickle Microchip PIC ICSP is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+# Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with Pickle Microchip PIC ICSP. If not, see http://www.gnu.org/licenses/
+#
+
+# Refer to:
+#
+# https://www.microchip.com/doclisting/TechDoc.aspx?type=Programming
+
+SHOPPING LIST
+=============
+
+GET
+---
+
+BASELINE
+	UNKNOWN
+MIDRANGE
+	UNKNOWN
+ENHANCED
+	PIC16F15275	DS40002149A	FUTURE PRODUCT
+PIC18
+	PIC18F16Q40	DS40002185A	FUTURE PRODUCT
+	PIC18F16Q41	DS40002143C	FUTURE PRODUCT
+	PIC18F26Q83	DS40002137A	FUTURE PRODUCT
+	PIC18F27Q84	DS40002137A	FUTURE PRODUCT
+PIC24
+	UNKNOWN
+dsPIC
+	UNKNOWN
+PIC32
+	UNKNOWN
+
+GETTING
+-------
+
+BASELINE
+	N/A
+MIDRANGE
+	N/A
+ENHANCED
+	N/A
+PIC18
+	N/A
+PIC24
+	N/A
+dsPIC
+	N/A
+PIC32
+	N/A
+
+GOT
+---
+
+BASELINE
+	N/A
+MIDRANGE
+	N/A
+ENHANCED
+	N/A
+PIC18
+	N/A
+PIC24
+	N/A
+dsPIC
+	DSPIC33CH128MP202-I/SS
+	DSPIC33CK256MP202-I/SS
+	DSPIC33CH128MP502-I/SS
+PIC32
+	PIC32MX274F256B-I/SO

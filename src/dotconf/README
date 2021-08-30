@@ -1,0 +1,198 @@
+#
+# Copyright (C) 2005-2020 Darron Broad
+# All rights reserved.
+#
+# This file is part of Pickle Microchip PIC ICSP.
+#
+# Pickle Microchip PIC ICSP is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published
+# by the Free Software Foundation.
+#
+# Pickle Microchip PIC ICSP is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+# Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with Pickle Microchip PIC ICSP. If not, see http://www.gnu.org/licenses/
+#
+
+#
+# Edit this file and copy to ~/.pickle or ~/.pickle/config
+#
+
+# I/O device
+#
+#DEVICE=BPI                     # Banana Pi SBC
+#DEVICE=CP2104                  # CP2104 USB UART
+#DEVICE=FTDI                    # FTDI FT230X, FT4232H, FT2232H or FT232 USB UART
+#DEVICE=GPIO-BB                 # Linux GPIO bit-bang kernel module
+#DEVICE=MCP2221                 # Microchip USB bridge
+#DEVICE=MCP23016                # Microchip I2C I/O expander
+#DEVICE=MCP230XX                # Microchip 23008/23017 I2C I/O expanders
+#DEVICE=MCP23SXX                # Microchip 23S08/23S17 SPI I/O expanders
+#DEVICE=PCF8574                 # Philips I2C I/O expander
+#DEVICE=RPI                     # Raspberry Pi/0/2/3/4 SBCs
+#DEVICE=TTY                     # POSIX RS-232 UART
+
+# I/O interface
+#IFACE=/dev/ttyUSB0             # CP2104 or TTY
+#IFACE=0                        # FTDI
+#IFACE=/dev/gpio-bb             # GPIO-BB
+#IFACE=/dev/i2c-1               # MCP23016, MCP230XX or PCF8574
+#IFACE=/dev/spidev0.1           # MCP23SXX
+#IFACE=/dev/ttyS0               # TTY
+
+# I/O 1/2-bit delay/sleep time
+#
+# For ttyS   use 1
+# For ttyUSB use 600
+# For RPI    use 1
+#
+# When SLEEP is set to zero no delay is taken
+# When SLEEP is less than 10, then SLEEP x I/O bit time is taken for RPI and tty
+# When SLEEP is less than 100 a busy loop is utilised
+# When SLEEP is >=100 then system usleep is used.
+#
+# For GPIO BIT-BANG SLEEP configures the low and high clock durations in the driver
+#
+# TTY ttyS
+#SLEEP=1
+# TTY ttyUSB
+#SLEEP=600
+# RPI VELLEMAN K8048
+#SLEEP=10
+# RPI GPIO
+#SLEEP=1
+# I2C/SPI
+#SLEEP=0
+# GPIO-BB
+#SLEEP=1
+
+# I/O bit rules.
+#       These rules determine the polarity of the control lines and whether
+#       data input requires data output pulled high or low.
+# 0x0001 PGD_OUT_FLIP
+# 0x0002 PGC_OUT_FLIP
+# 0x0004 VPP_OUT_FLIP
+# 0x0008 PGD_IN_FLIP
+# 0x0010 PGD_IN_PULLUP
+# 0x0020 PGM_OUT_FLIP
+# 0x0040 VPP_OUT_CLOCK
+# 0x0080 PGD_IN_PULLDOWN
+#       These rules release GPIOs on program exit by setting them to Input.
+# 0x0100 PGD_RELEASE
+# 0x0200 PGC_RELEASE
+# 0x0400 PGM_RELEASE
+# 0x0800 VPP_RELEASE
+# 0x1000 VPP_RUN
+#       This rule enables shift with irq lock for GPIO BIT-BANG
+# 0x2000 BB_LOCK
+#       This rule resets any released pin to its previous function on exit (input, output or ALT).
+# 0x4000 ALT_RELEASE
+#       This rule is for Winklepicker reset
+# 0x8000 TX_BREAK
+
+# TTY VELLEMAN K8048 = PGD_IN_PULLUP + PGD_OUT_FLIP + PGC_OUT_FLIP + VPP_OUT_FLIP + PGD_IN_FLIP
+# TTY VELLEMAN K8076 = PGD_IN_PULLUP
+# RPI VELLEMAN K8048 = PGD_IN_PULLUP
+#
+# TTY VELLEMAN K8048
+#BITRULES=0x001F
+# TTY VELLEMAN K8076
+#BITRULES=0x0010
+# RPI VELLEMAN K8048
+#BITRULES=0x0010
+# RPI GPIO
+#BITRULES=0x1000
+# MCP23017 I2C
+#BITRULES=0x1010
+# GPIO-BB
+#BITRULES=0x1000
+# RPI CHIPKIT PI PIC32 ICSP
+#BITRULES=0x4F00
+# TTY T-TYPE FLIP FLOP ON TXD FOR VPP
+#BITRULES=0x004F
+
+# I/O busy cursor speed (0=DISABLED)
+#
+#BUSY=0
+
+# RPI VELLEMAN K8048 (https://wiki.kewl.org/dokuwiki/projects:k8048-rpi)
+#
+# TX/!MCLR/VPP     - DSUB9(3)
+#VPP=14
+# PGM              - NOT SUPPORTED ON VELLEMAN K8048
+#PGM=-1
+# RTS/PGC CLOCK    - DSUB9(7)
+#PGC=18
+# DTR/PGD DATA_OUT - DSUB9(4)
+#PGDO=24
+# CTS/PGD DATA_IN  - DSUB9(8)
+#PGDI=25
+
+# RPI GPIO (separate PGD DATA I/O)
+#                  = SLICE OF PI/O =
+# !MCLR/VPP        - PI/O G04
+#VPP=4
+# PGM              - PI/O G22
+#PGM=22
+# PGC CLOCK        - PI/O G25
+#PGC=25
+# PGD DATA_OUT     - PI/O G24
+#PGDO=24
+# PGD DATA_IN      - PI/O G23
+#PGDI=23
+
+# RPI OR GPIO-BB (single PGD DATA I/O)
+#                  = SLICE OF PI/O =
+# !MCLR/VPP        - PI/O G04
+#VPP=4
+# PGM              - PI/O G22
+#PGM=22
+# PGC CLOCK        - PI/O G25
+#PGC=25
+# PGD DATA_I/O     - PI/O G24
+#PGD=24
+
+# RPI OR GPIO-BB (single PGD DATA I/O)
+#                  = CHIPKIT PI I/O =
+# !MCLR/VPP        - RPI-Connect 18
+#VPP=9
+# PGM              - RPI-Connect 12
+#PGM=22
+# PGC CLOCK        - RPI-Connect 16
+#PGC=10
+# PGD DATA_I/O     - RPI-Connect 20
+#PGD=11
+
+# RPI OR GPIO-BB (single PGD DATA I/O)
+#                  = CHIPKIT PI PIC32 ICSP =
+# !MCLR/VPP        - /RESET
+#VPP=4
+# PGM              - N/A
+#PGM=-1
+# PGC CLOCK        - PGC1 RX2
+#PGC=14
+# PGD DATA_I/O     - PGD1 TX2
+#PGD=15
+
+# I2C/SPI ADDRESS
+#
+#ADDR=0x20
+
+# ICSP I/O 1/2-bit sleep time for `pio'.
+#FWSLEEP=30
+
+# Debug level (0=NONE, 1=ERROR, 10=INFO)
+#DEBUG=1
+
+# PIC14-NEW, PIC16, and PIC16-NEW CONFIG MASK
+#
+# 1 CONFIGVER        APPLY TO VERIFY (DEFAULT)
+# 2 CONFIGAND        APPLY TO DUMP   (DEFAULT)
+# 4 CONFIGSET        APPLY TO WRITE
+#
+# DOES NOT APPLY TO PIC18J SERIES
+#
+#CONFIG=0 # DISABLED

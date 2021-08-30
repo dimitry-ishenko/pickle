@@ -1,0 +1,14 @@
+#
+# GP3 PGDI <---------- PGD
+# GP2 VPP  ----------> MCLR
+# GP1 PGC  ----------> PGC
+# GP0 PGDO ----1K----> PGD
+#
+DEVICE=MCP2221
+BITRULES=0x1000
+SLEEP=0
+PGDI=3
+VPP=2
+PGC=1
+PGDO=0
+PGM=-1  # N/A

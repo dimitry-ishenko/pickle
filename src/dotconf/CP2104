@@ -1,0 +1,15 @@
+#
+# IO0 ---------> MCLR
+# IO1 ---------> PGC
+# IO2 ---390R--> PGD
+# IO3 <--390R--- PGD
+#
+# /dev/ttyUSB0
+#
+DEVICE=CP2104
+IFACE=/dev/ttyUSB0
+BITRULES=0x1000
+VPP=0
+PGC=1
+PGDO=2
+PGDI=3
