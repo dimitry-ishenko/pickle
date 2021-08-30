@@ -1,0 +1,104 @@
+Description: Fix install paths
+Author: Dimitry Ishenko <dimitry.ishenko@gmail.com>
+
+--- pickle-5.01.orig/src/Makefile
++++ pickle-5.01/src/Makefile
+@@ -59,10 +59,7 @@ ifneq (,$(findstring CYGWIN,$(SYSTEM)))
+ CFLAGS+=-D__USE_LINUX_IOCTL_DEFS
+ endif
+ 
+-BINDIR?=/usr/local/bin
+-BINMODE?=4755
+-BINUSER?=0
+-BINGROUP?=0
++BINDIR?=$(DESTDIR)/usr/bin
+ 
+ #RPi armv6l binary
+ RPIDIR=/opt/pickle
+@@ -385,40 +382,40 @@ $(OBJECT5):$(HEADER5) Makefile $(CONFIG)
+ 	$(CC) $(CFLAGS) -c $< -o $@
+ 
+ install:build
+-	$(BSDINSTALL) -d -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(BINDIR)
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET1) $(BINDIR)
++	$(BSDINSTALL) -d $(BINDIR)
++	$(BSDINSTALL) $(TARGET1) $(BINDIR)
+ ifeq "$(P12)" "1"
+-	ln -sf $(BINDIR)/$(TARGET1) $(BINDIR)/p12
++	ln -sf $(TARGET1) $(BINDIR)/p12
+ endif
+ ifeq "$(P14)" "1"
+-	ln -sf $(BINDIR)/$(TARGET1) $(BINDIR)/p14
++	ln -sf $(TARGET1) $(BINDIR)/p14
+ endif
+ ifeq "$(N14)" "1"
+-	ln -sf $(BINDIR)/$(TARGET1) $(BINDIR)/n14
++	ln -sf $(TARGET1) $(BINDIR)/n14
+ endif
+ ifeq "$(P16)" "1"
+-	ln -sf $(BINDIR)/$(TARGET1) $(BINDIR)/p16
++	ln -sf $(TARGET1) $(BINDIR)/p16
+ endif
+ ifeq "$(N16)" "1"
+-	ln -sf $(BINDIR)/$(TARGET1) $(BINDIR)/n16
++	ln -sf $(TARGET1) $(BINDIR)/n16
+ endif
+ ifeq "$(P24)" "1"
+-	ln -sf $(BINDIR)/$(TARGET1) $(BINDIR)/p24
++	ln -sf $(TARGET1) $(BINDIR)/p24
+ endif
+ ifeq "$(P32)" "1"
+-	ln -sf $(BINDIR)/$(TARGET1) $(BINDIR)/p32
++	ln -sf $(TARGET1) $(BINDIR)/p32
+ endif
+ ifeq "$(PIO)" "1"
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET2) $(BINDIR)
++	$(BSDINSTALL) $(TARGET2) $(BINDIR)
+ endif
+ ifeq "$(PTEST)" "1"
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET3) $(BINDIR)
++	$(BSDINSTALL) $(TARGET3) $(BINDIR)
+ endif
+ ifeq "$(PCTRL)" "1"
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET4) $(BINDIR)
++	$(BSDINSTALL) $(TARGET4) $(BINDIR)
+ endif
+ ifeq "$(PLOAD)" "1"
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET5) $(BINDIR)
++	$(BSDINSTALL) $(TARGET5) $(BINDIR)
+ endif
+ 
+ uninstall:
+@@ -442,19 +439,19 @@ endif
+ ifeq "$(FTDI)" "1"
+ 	$(error do not enable FTDI)
+ endif
+-	$(BSDINSTALL) -d -g$(BINGROUP) -m0755 -o$(BINUSER) $(RPIDIR)
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET1) $(RPIDIR)
+-	ln -sf $(RPIDIR)/$(TARGET1) $(RPIDIR)/p12
+-	ln -sf $(RPIDIR)/$(TARGET1) $(RPIDIR)/p14
+-	ln -sf $(RPIDIR)/$(TARGET1) $(RPIDIR)/n14
+-	ln -sf $(RPIDIR)/$(TARGET1) $(RPIDIR)/p16
+-	ln -sf $(RPIDIR)/$(TARGET1) $(RPIDIR)/n16
+-	ln -sf $(RPIDIR)/$(TARGET1) $(RPIDIR)/p24
+-	ln -sf $(RPIDIR)/$(TARGET1) $(RPIDIR)/p32
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET2) $(RPIDIR)
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET3) $(RPIDIR)
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET4) $(RPIDIR)
+-	$(BSDINSTALL) -g$(BINGROUP) -m$(BINMODE) -o$(BINUSER) $(TARGET5) $(RPIDIR)
++	$(BSDINSTALL) -d $(RPIDIR)
++	$(BSDINSTALL) $(TARGET1) $(RPIDIR)
++	ln -sf $(TARGET1) $(RPIDIR)/p12
++	ln -sf $(TARGET1) $(RPIDIR)/p14
++	ln -sf $(TARGET1) $(RPIDIR)/n14
++	ln -sf $(TARGET1) $(RPIDIR)/p16
++	ln -sf $(TARGET1) $(RPIDIR)/n16
++	ln -sf $(TARGET1) $(RPIDIR)/p24
++	ln -sf $(TARGET1) $(RPIDIR)/p32
++	$(BSDINSTALL) $(TARGET2) $(RPIDIR)
++	$(BSDINSTALL) $(TARGET3) $(RPIDIR)
++	$(BSDINSTALL) $(TARGET4) $(RPIDIR)
++	$(BSDINSTALL) $(TARGET5) $(RPIDIR)
+ 	tar Pzcvf $(RPIBIN) $(RPIDIR)
+ 
+ clean:
