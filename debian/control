@@ -2,7 +2,7 @@ Source: pickle
 Section: devel
 Priority: optional
 Maintainer: Dimitry Ishenko <dimitry.ishenko@gmail.com>
-Build-Depends: debhelper-compat (= 13), libftdi-dev
+Build-Depends: debhelper-compat (= 13), libftdi1-dev
 Standards-Version: 4.5.1
 Homepage: https://wiki.kewl.org/dokuwiki/projects:pickle
 Rules-Requires-Root: no
