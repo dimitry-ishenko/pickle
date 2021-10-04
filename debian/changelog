@@ -1,3 +1,10 @@
+pickle (5.01-2) hirsute; urgency=medium
+
+  * Use newer libftdi.
+  * Make pickle setuid.
+
+ -- Dimitry Ishenko <dimitry.ishenko@gmail.com>  Mon, 04 Oct 2021 16:30:47 -0400
+
 pickle (5.01-1) unstable; urgency=medium
 
   * Initial release.
