@@ -1,0 +1,10 @@
+#!/bin/sh
+
+PICKLE=/usr/bin/pickle
+
+if [ "$1" = configure ]; then
+    if ! dpkg-statoverride --list "$PICKLE" >/dev/null; then
+        dpkg-statoverride --update --add root root 4755 "$PICKLE"
+    fi
+fi
+
